@@ -58,6 +58,8 @@ void dfs(int u)
     if (u == t)
     {
         augment(t, INF);
+        visited[t] = false; // open possibility to find more prospective s-t paths in current dfs journey
+        mf += f; // better increase max flow here before the variable f being overwritten by a prospective s-t path
         return;
     }
     bool is_deadend = true;
@@ -83,7 +85,6 @@ void find_bf() // blocking flow
         memset(p, -1, sizeof p);
         memset(visited, false, sizeof visited);
         dfs(s);
-        mf += f;
     } while (f > 0);
 }
 
